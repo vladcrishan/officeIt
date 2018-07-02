@@ -1,0 +1,20 @@
+<products>
+	<product>
+		<id>9991</id>
+		<price>100</price>
+		<name>Scaun0</name>
+		<description>blabla</description>
+	</product>
+	<product>
+		<id>9992</id>
+		<price>101</price>
+		<name>Scaun1</name>
+		<description>blabla</description>
+	</product>
+	<product>
+		<id>9993</id>
+		<price>102</price>
+		<name>Scaun2</name>
+		<description>blabla</description>
+	</product>
+</products>

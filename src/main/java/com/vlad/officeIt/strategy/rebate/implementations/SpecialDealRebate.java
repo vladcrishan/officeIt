@@ -9,10 +9,10 @@ public class SpecialDealRebate implements Rebate {
     @Override
     public Price calculatePrice(Order order) {
 
-        Price price = new Price(order.getInitialPrice());
+        Price price = new Price(order.getInitialPrice(), order.getInitialPrice());
 
-        // apply rebate, if client Visma
-        if (order.getClient().getName().equals("Visma")) {
+        // Order price bigger than 40
+        if (order.getInitialPrice() > 40) {
             price.setFinalPrice(order.getInitialPrice() - 30);
         }
 

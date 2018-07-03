@@ -11,14 +11,13 @@ import com.vlad.officeIt.strategy.rebate.RebateType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CalculatePriceController {
@@ -27,7 +26,7 @@ public class CalculatePriceController {
     private ClientService clientService;
     private ProductService productService;
 
-    private static final String CONTENT = "calculatePrice";
+    private static final String CONTENT = "price";
 
     @Autowired
     public void setPriceService(PriceService priceService) {
@@ -44,8 +43,8 @@ public class CalculatePriceController {
         this.productService = productService;
     }
 
-    @GetMapping("/calculatePrice")
-    public String calculatePrice(Model model) {
+    @GetMapping("/price")
+    public String price(Model model) {
         try {
             model.addAttribute(HomeController.CONTENT_ATTRIBUTE, CONTENT);
             model.addAttribute(ClientController.CLIENTS_ATTRIBUTE, clientService.getClients());
@@ -57,24 +56,32 @@ public class CalculatePriceController {
         }
     }
 
-    @GetMapping("/price")
-    public String price(Model model) {
-
+    @PostMapping("/calculatePrice")
+    public String calculatePrice(@RequestParam("cid") String clientId, @RequestParam("pid") String productIds, Model model) {
         try {
-            Client client = clientService.getClient(1);
-            List<Product> products = productService.getProducts(Arrays.asList(91, 92, 93));
+            Client client = clientService.getClient(Integer.parseInt(clientId));
+
+            String[] pIds = productIds.split(",");
+            int[] array = Arrays.stream(pIds).mapToInt(Integer::parseInt).toArray();
+            List<Integer> productIdsList = Arrays.stream(array).boxed().collect(Collectors.toList());
+            List<Product> products = productService.getProducts(productIdsList);
 
             Order order = new Order(client, products);
             Price price = priceService.calculatePrice(order);
             order.setPrice(price);
 
             model.addAttribute(HomeController.CONTENT_ATTRIBUTE, HomeController.CONTENT);
-            model.addAttribute(HomeController.MESSAGE, String.format("Total price: %s  Price with rebate: %s", order.getInitialPrice(), order.getFinalPrice()));
+            StringBuilder message = new StringBuilder(String.format("Total price: %s ", order.getInitialPrice()));
+            if (order.hasDiscount()) {
+                message.append(String.format(" Price with rebate: %s Rebate type: %s", order.getFinalPrice(), order.getRebate()));
+            }
+            model.addAttribute(HomeController.MESSAGE, message.toString());
+
             return "home";
 
         } catch (Exception e) {
             model.addAttribute(HomeController.CONTENT_ATTRIBUTE, HomeController.CONTENT);
-            model.addAttribute(HomeController.MESSAGE, "Application Error! Failed to load data, please contact your administrator");
+            model.addAttribute(HomeController.MESSAGE, "Application Error! Failed to load data, please contact your administrator." + e);
             return "home";
         }
     }

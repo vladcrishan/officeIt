@@ -8,7 +8,7 @@ public class VolumeRebate implements Rebate {
     @Override
     public Price calculatePrice(Order order) {
 
-        Price price = new Price(order.getInitialPrice());
+        Price price = new Price(order.getInitialPrice(),order.getInitialPrice());
 
         // apply rebate
         if (order.getProducts().size() > 2) {

@@ -55,4 +55,16 @@ public class Order {
                 ", products=" + products +
                 '}';
     }
+
+    public String getRebate() {
+        return client.getRebateType().name();
+    }
+
+    public boolean hasDiscount() {
+        boolean discount = false;
+        if(!price.getFinalPrice().equals(price.getInitialPrice())){
+            discount = true;
+        }
+        return discount;
+    }
 }

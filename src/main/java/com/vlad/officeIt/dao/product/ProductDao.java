@@ -22,6 +22,11 @@ public interface ProductDao {
                 selectedProducts.add(cursor);
             }
         }
+
+        if(selectedProducts.size() == 0){
+            throw new Exception("No products with those ids");
+        }
+
         return selectedProducts;
     }
 }

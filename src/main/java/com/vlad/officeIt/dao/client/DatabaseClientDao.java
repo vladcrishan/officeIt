@@ -14,13 +14,13 @@ public class DatabaseClientDao implements ClientDao {
     List<Client> clients = new ArrayList<Client>() {{
         add(new Client(1, "Visma", RebateType.VOLUME));
         add(new Client(2, "Continental", RebateType.TIME_OF_YEAR));
-        add(new Client(3, "E-spres-oh", RebateType.SPECIAL_DEAL));
+        add(new Client(3, "E-spres-oh", RebateType.VOLUME));
         add(new Client(4, "Azets", RebateType.VOLUME));
         add(new Client(5, "New Haircut", RebateType.SPECIAL_DEAL));
         add(new Client(6, "Bluematrix", RebateType.SPECIAL_DEAL));
         add(new Client(7, "Everseen", RebateType.VOLUME));
         add(new Client(8, "Ness", RebateType.SPECIAL_DEAL));
-        add(new Client(9, "Cmed", RebateType.TIME_OF_YEAR));
+        add(new Client(9, "Cmed", RebateType.VOLUME));
         add(new Client(10, "Deventure", RebateType.TIME_OF_YEAR));
     }};
 

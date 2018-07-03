@@ -1,20 +1,20 @@
 <products>
 	<product>
-		<id>9991</id>
+		<id>7771</id>
 		<price>100</price>
-		<name>Scaun0</name>
+		<name>Birou0</name>
 		<description>blabla</description>
 	</product>
 	<product>
-		<id>9992</id>
+		<id>7772</id>
 		<price>101</price>
-		<name>Scaun1</name>
+		<name>Birou1</name>
 		<description>blabla</description>
 	</product>
 	<product>
-		<id>9993</id>
+		<id>7773</id>
 		<price>102</price>
-		<name>Scaun2</name>
+		<name>Birou2</name>
 		<description>blabla</description>
 	</product>
 </products>

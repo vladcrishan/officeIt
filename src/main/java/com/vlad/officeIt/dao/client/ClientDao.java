@@ -19,6 +19,7 @@ public interface ClientDao {
                 return cursor;
             }
         }
-        return null;
+
+        throw new Exception("No Client with that id");
     }
 }

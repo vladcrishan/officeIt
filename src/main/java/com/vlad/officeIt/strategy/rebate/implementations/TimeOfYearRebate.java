@@ -10,7 +10,7 @@ public class TimeOfYearRebate implements Rebate {
     @Override
     public Price calculatePrice(Order order) {
 
-        Price price = new Price(order.getInitialPrice());
+        Price price = new Price(order.getInitialPrice(), order.getInitialPrice());
 
         // apply rebate, black friday
         if (MonthDay.now() == MonthDay.of(11, 23)) {

@@ -51,11 +51,21 @@
     </div>
 </div>
 
-<div th:fragment="calculatePrice">
-    <select class="selectpicker">
-        <option th:each="client: ${clients}" th:value="${client.id}" th:text="${client.name}">${client.name}
-        </option>
-    </select>
+<div th:fragment="price">
+    <form method="post" th:action="@{/calculatePrice}" action="#">
+        <div class="form-group">
+            <label for="clientId">Client id</label>
+            <input type="text" id="clientId" name="cid" class="form-control" placeholder="1">
+        </div>
+        <div class="form-group">
+            <label for="productIds">Products ids</label>
+            <input type="text" id="productIds" name="pid" class="form-control" placeholder="1,2,3"
+                   aria-describedby="emailHelp">
+            <small id="productsHelp" class="form-text text-muted">Please input the products Ids separated with comma
+            </small>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate Price</button>
+    </form>
 </div>
 
 <div th:fragment="title">

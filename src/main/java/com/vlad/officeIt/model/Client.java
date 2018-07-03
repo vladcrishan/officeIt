@@ -2,6 +2,7 @@ package com.vlad.officeIt.model;
 
 
 import com.vlad.officeIt.strategy.rebate.RebateType;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
